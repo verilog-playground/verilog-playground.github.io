@@ -1,3 +1,4 @@
+import { SevenSegmentsDisplay } from './seven-segments-display';
 import { Board } from './board';
 import { ComponentProps } from './component';
 import topBoardSrc from './images/top-board.png';
@@ -17,7 +18,7 @@ export class TopBoard extends Board {
       img: props.img,
 
       width: 511,
-      height: 176,
+      height: 180,
 
       top: 3,
       bottom: 3,
@@ -35,6 +36,12 @@ export class TopBoard extends Board {
       canvasCtx: props.canvasCtx,
 
       img: img,
+    });
+
+    await SevenSegmentsDisplay.create({
+      x: props.x + 198,
+      y: props.y + 7,
+      canvasCtx: props.canvasCtx,
     });
 
     return instance;
