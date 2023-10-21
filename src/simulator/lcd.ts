@@ -1,5 +1,5 @@
 import { Component, ComponentProps } from './component';
-import lcdSrc from './lcd.png';
+import lcdSrc from './images/lcd.png';
 import Util from './util';
 
 export interface LcdProps extends ComponentProps {

@@ -15,6 +15,7 @@ function App() {
     }
 
     const canvasCtx = canvas.getContext('2d')!;
+    canvasCtx.imageSmoothingEnabled = false;
 
     Simulator.create(canvasCtx).then((simulator) => setSimulator(simulator));
   }, [canvasRef]);

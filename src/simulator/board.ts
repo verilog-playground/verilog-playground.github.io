@@ -1,7 +1,7 @@
 import { Component, ComponentProps } from './component';
 
 export interface BoardProps extends ComponentProps {
-  readonly boardImg: HTMLImageElement;
+  readonly img: HTMLImageElement;
 
   readonly width: number;
   readonly height: number;
@@ -16,16 +16,14 @@ export class Board extends Component {
   constructor(props: BoardProps) {
     super(props);
 
-    props.canvasCtx.imageSmoothingEnabled = false;
-
     // Center
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
       props.left,
       props.top,
-      props.boardImg.width - props.left - props.right,
-      props.boardImg.height - props.top - props.bottom,
+      props.img.width - props.left - props.right,
+      props.img.height - props.top - props.bottom,
 
       props.x + props.left,
       props.y + props.top,
@@ -35,12 +33,12 @@ export class Board extends Component {
 
     // Right
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
-      props.boardImg.width - props.right,
+      props.img.width - props.right,
       props.top,
       props.right,
-      props.boardImg.height - props.top - props.bottom,
+      props.img.height - props.top - props.bottom,
 
       props.x + props.width - props.right,
       props.y + props.top,
@@ -50,10 +48,10 @@ export class Board extends Component {
 
     // Bottom-right
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
-      props.boardImg.width - props.right,
-      props.boardImg.height - props.bottom,
+      props.img.width - props.right,
+      props.img.height - props.bottom,
       props.right,
       props.bottom,
 
@@ -65,11 +63,11 @@ export class Board extends Component {
 
     // Bottom
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
       props.left,
-      props.boardImg.height - props.bottom,
-      props.boardImg.width - props.left - props.right,
+      props.img.height - props.bottom,
+      props.img.width - props.left - props.right,
       props.bottom,
 
       props.x + props.left,
@@ -80,10 +78,10 @@ export class Board extends Component {
 
     // Bottom-left
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
       0,
-      props.boardImg.height - props.bottom,
+      props.img.height - props.bottom,
       props.left,
       props.bottom,
 
@@ -95,12 +93,12 @@ export class Board extends Component {
 
     // Left
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
       0,
       props.top,
       props.left,
-      props.boardImg.height - props.top - props.bottom,
+      props.img.height - props.top - props.bottom,
 
       props.x,
       props.y + props.top,
@@ -110,7 +108,7 @@ export class Board extends Component {
 
     // Top-left
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
       0,
       0,
@@ -125,11 +123,11 @@ export class Board extends Component {
 
     // Top
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
       props.left,
       0,
-      props.boardImg.width - props.left - props.right,
+      props.img.width - props.left - props.right,
       props.top,
 
       props.x + props.left,
@@ -140,9 +138,9 @@ export class Board extends Component {
 
     // Top-right
     props.canvasCtx.drawImage(
-      props.boardImg,
+      props.img,
 
-      props.boardImg.width - props.right,
+      props.img.width - props.right,
       0,
       props.right,
       props.top,

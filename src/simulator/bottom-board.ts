@@ -1,24 +1,24 @@
 import { Board } from './board';
 import { ComponentProps } from './component';
 import { Lcd } from './lcd';
-import boardBottomSrc from './board-bottom.png';
+import bottomBoardSrc from './images/bottom-board.png';
 import Util from './util';
 
-export interface BoardBottomProps extends ComponentProps {
-  readonly boardBottomImg: HTMLImageElement;
+export interface BottomBoardProps extends ComponentProps {
+  readonly img: HTMLImageElement;
 }
 
-export class BoardBottom extends Board {
-  private constructor(props: BoardBottomProps) {
+export class BottomBoard extends Board {
+  private constructor(props: BottomBoardProps) {
     super({
       x: props.x,
       y: props.y,
       canvasCtx: props.canvasCtx,
 
-      boardImg: props.boardBottomImg,
+      img: props.img,
 
-      width: 511,
-      height: 176,
+      width: 512,
+      height: 177,
 
       top: 3,
       bottom: 3,
@@ -28,19 +28,19 @@ export class BoardBottom extends Board {
   }
 
   static async create(props: ComponentProps) {
-    const img = await Util.loadImage(boardBottomSrc);
+    const img = await Util.loadImage(bottomBoardSrc);
 
-    const instance = new BoardBottom({
+    const instance = new BottomBoard({
       x: props.x,
       y: props.y,
       canvasCtx: props.canvasCtx,
 
-      boardBottomImg: img,
+      img: img,
     });
 
     await Lcd.create({
-      x: props.x + 6,
-      y: props.y + 6,
+      x: props.x + 7,
+      y: props.y + 7,
       canvasCtx: props.canvasCtx,
     });
 
