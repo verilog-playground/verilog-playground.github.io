@@ -9,6 +9,14 @@ export interface BottomBoardProps extends ComponentProps {
 }
 
 export class BottomBoard extends Board {
+  static readonly topPadding = 7;
+  static readonly bottomPadding = 9;
+  static readonly leftPadding = 7;
+  static readonly rightPadding = 9;
+
+  static readonly width = this.leftPadding + Lcd.width + this.rightPadding;
+  static readonly height = this.topPadding + Lcd.height + this.bottomPadding;
+
   private constructor(props: BottomBoardProps) {
     super({
       x: props.x,
@@ -17,8 +25,8 @@ export class BottomBoard extends Board {
 
       img: props.img,
 
-      width: 512,
-      height: 177,
+      width: BottomBoard.width,
+      height: BottomBoard.height,
 
       top: 3,
       bottom: 3,

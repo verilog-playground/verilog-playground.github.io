@@ -7,6 +7,9 @@ export interface LcdProps extends ComponentProps {
 }
 
 export class Lcd extends Component {
+  static readonly width = 496;
+  static readonly height = 161;
+
   constructor(props: LcdProps) {
     super(props);
 

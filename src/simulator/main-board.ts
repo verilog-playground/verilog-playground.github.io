@@ -10,6 +10,24 @@ export interface MainBoardProps extends ComponentProps {
 }
 
 export class MainBoard extends Board {
+  static readonly topPadding = 7;
+  static readonly bottomPadding = 9;
+  static readonly leftPadding = 7;
+  static readonly rightPadding = 9;
+
+  static readonly midGap = 24;
+
+  static readonly width =
+    this.leftPadding +
+    Math.max(TopBoard.width, BottomBoard.width) +
+    this.rightPadding;
+  static readonly height =
+    this.topPadding +
+    TopBoard.height +
+    this.midGap +
+    BottomBoard.height +
+    this.bottomPadding;
+
   private constructor(props: MainBoardProps) {
     super({
       x: props.x,
@@ -18,8 +36,8 @@ export class MainBoard extends Board {
 
       img: props.img,
 
-      width: 511 + 1 + 6 + 3 + 6,
-      height: 176 + 1 + 6 + 3 + 6,
+      width: MainBoard.width,
+      height: MainBoard.height,
 
       top: 3,
       bottom: 3,
@@ -40,14 +58,19 @@ export class MainBoard extends Board {
     });
 
     await TopBoard.create({
-      x: props.x + 1 + 6,
-      y: props.y + 1 + 6,
+      x: Math.floor(
+        props.x +
+          this.leftPadding +
+          (this.width - this.leftPadding - this.rightPadding) / 2 -
+          TopBoard.width / 2,
+      ),
+      y: props.y + MainBoard.topPadding,
       canvasCtx: props.canvasCtx,
     });
 
     await BottomBoard.create({
-      x: props.x + 1 + 6,
-      y: 200,
+      x: props.x + MainBoard.leftPadding,
+      y: props.y + MainBoard.topPadding + TopBoard.height + MainBoard.midGap,
       canvasCtx: props.canvasCtx,
     });
 

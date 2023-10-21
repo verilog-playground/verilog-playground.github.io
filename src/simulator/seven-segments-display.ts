@@ -8,6 +8,8 @@ export interface SevenSegmentsDisplayProps extends ComponentProps {
 }
 
 export class SevenSegmentsDisplay extends Component {
+  static readonly height = 164;
+
   constructor(props: SevenSegmentsDisplayProps) {
     super(props);
 
