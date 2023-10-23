@@ -1,0 +1,5 @@
+.Switches {
+  display: grid;
+  column-gap: 24px;
+  grid-template-columns: repeat(8, min-content);
+}
