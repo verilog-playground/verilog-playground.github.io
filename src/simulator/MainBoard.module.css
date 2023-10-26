@@ -1,4 +1,7 @@
 .MainBoard {
+  margin-top: -2px;
+  margin-left: -2px;
+
   width: fit-content;
   height: fit-content;
 

@@ -1,4 +1,7 @@
 .TopBoard {
+  margin-top: -2px;
+  margin-left: -2px;
+
   width: fit-content;
   height: fit-content;
 
@@ -10,7 +13,7 @@
   display: grid;
 
   gap: 24px;
-  padding: 12px;
+  padding: 24px;
   margin: -2px 0 0 -2px;
 
   justify-items: center;
