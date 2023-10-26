@@ -1,16 +1,16 @@
-.Image {
+.MainBoard {
   width: fit-content;
   height: fit-content;
 
   border: 3px solid;
-  border-image: url('images/top-board.png') 3 3 3 3 fill;
+  border-image: url('images/main-board.png') 3 3 3 3 fill;
 }
 
 .Content {
   display: grid;
 
   gap: 24px;
-  padding: 12px;
+  padding: 6px;
   margin: -2px 0 0 -2px;
 
   justify-items: center;

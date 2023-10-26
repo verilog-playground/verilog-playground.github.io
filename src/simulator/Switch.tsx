@@ -1,7 +1,7 @@
 import React from 'react';
 import switchOffSrc from './images/switch-off.png';
 import switchOnSrc from './images/switch-on.png';
-import './Switch.css';
+import styles from './Switch.module.css';
 
 interface SwitchProps {
   readonly on: boolean;
@@ -18,7 +18,7 @@ function Switch(props: SwitchProps) {
 
   return (
     <img
-      className="Switch"
+      className={styles.Switch}
       alt="switch"
       draggable={false}
       src={on ? switchOnSrc : switchOffSrc}

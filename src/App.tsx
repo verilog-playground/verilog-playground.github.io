@@ -1,10 +1,9 @@
-import React from 'react';
-import TopBoard from './TopBoard';
+import MainBoard from './simulator/MainBoard';
 
 function App() {
   return (
     <div>
-      <TopBoard />
+      <MainBoard />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Switch from './Switch';
-import './Switches.css';
+import styles from './Switches.module.css';
 
 interface SwitchesProps {
   readonly value?: number;
@@ -39,7 +39,7 @@ function Switches(props: SwitchesProps) {
     return switches;
   };
 
-  return <div className="Switches">{renderSwitches()}</div>;
+  return <div className={styles.Switches}>{renderSwitches()}</div>;
 }
 
 export default Switches;
