@@ -16,7 +16,7 @@ function Leds(props: LedsProps) {
     const leds = [];
 
     for (let i = 7; i >= 0; i--) {
-      leds.push(<Led state={getStateAtIndex(i)} />);
+      leds.push(<Led key={i} state={getStateAtIndex(i)} />);
     }
 
     return leds;
