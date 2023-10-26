@@ -1,6 +1,6 @@
 import React from 'react';
-import switchOffSrc from './images/switch-off.png';
 import switchOnSrc from './images/switch-on.png';
+import switchOffSrc from './images/switch-off.png';
 import styles from './Switch.module.css';
 
 interface SwitchProps {

@@ -3,12 +3,12 @@ import Switch from './Switch';
 import styles from './Switches.module.css';
 
 interface SwitchesProps {
-  readonly value?: number;
+  readonly defaultValue?: number;
   onChange?(value: number): void;
 }
 
 function Switches(props: SwitchesProps) {
-  const [value, setValue] = React.useState(props.value ?? 0);
+  const [value, setValue] = React.useState(props.defaultValue ?? 0);
 
   const onChange = (value: number) => {
     setValue(value);
@@ -26,7 +26,7 @@ function Switches(props: SwitchesProps) {
   const renderSwitches = () => {
     const switches = [];
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 7; i >= 0; i--) {
       switches.push(
         <Switch
           key={i}
