@@ -1,9 +1,9 @@
-import styles from './TopBar.module.css';
+import styles from './Header.module.css';
 import { BsGithub } from 'react-icons/bs';
 
-function TopBar() {
+function Header() {
   return (
-    <div className={styles.TopBar}>
+    <div className={styles.Header}>
       <p className={styles.Title}>Verilog Playground</p>
       <div />
       <a
@@ -17,4 +17,4 @@ function TopBar() {
   );
 }
 
-export default TopBar;
+export default Header;

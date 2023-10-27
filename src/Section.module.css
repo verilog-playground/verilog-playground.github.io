@@ -1,0 +1,19 @@
+.Section {
+  padding: 1rem;
+
+  box-shadow: 0 0 3px rgb(0 0 0 / 0.2);
+
+  background-color: white;
+}
+
+.Section > p {
+  margin: 0 0 1rem 0;
+
+  font-size: 1.5rem;
+  font-family: Roboto;
+  font-weight: bold;
+}
+
+.Section > div > * {
+  margin: auto;
+}

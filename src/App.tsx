@@ -1,20 +1,12 @@
-import React from 'react';
-import MainBoard from './simulator/MainBoard';
-import TopBar from './TopBar';
+import Header from './Header';
+import Body from './Body';
 
 function App() {
-  const [value, setValue] = React.useState(0);
-
   return (
-    <div>
-      <TopBar />
-      <MainBoard
-        sevenSegmentsDisplayValue={value}
-        switchesDefaultValue={value}
-        ledsValue={value}
-        onSwitchesChange={(value) => setValue(value)}
-      />
-    </div>
+    <>
+      <Header />
+      <Body />
+    </>
   );
 }
 
