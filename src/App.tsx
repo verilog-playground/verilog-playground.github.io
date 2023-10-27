@@ -1,11 +1,13 @@
-import Header from './Header';
-import Body from './Body';
+import AppBar from './AppBar';
+import SimulatorWrapper from './Simulator';
+import AccordionsWrapper from './AccordionsWrapper';
 
 function App() {
   return (
     <>
-      <Header />
-      <Body />
+      <AppBar />
+      <SimulatorWrapper />
+      <AccordionsWrapper />
     </>
   );
 }
