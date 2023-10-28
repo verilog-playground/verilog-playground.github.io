@@ -15,13 +15,9 @@ import {
   codeLastSubmittedKey,
   defaultCode,
 } from './constants';
+import { TranspilationContext } from './App';
 
-interface CodeEditorAccordionProps {
-  isTranspiling: boolean;
-  onRunClick(code: string): void;
-}
-
-function CodeEditorAccordion(props: CodeEditorAccordionProps) {
+function CodeEditorAccordion() {
   const theme = useTheme();
 
   // Same as OutlinedInput.
@@ -29,6 +25,8 @@ function CodeEditorAccordion(props: CodeEditorAccordionProps) {
     const light = theme.palette.mode === 'light';
     return light ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)';
   }, [theme.palette.mode]);
+
+  const transpilationContext = React.useContext(TranspilationContext);
 
   const [code, setCode] = React.useState(
     localStorage.getItem(codeAutoSaveKey) ?? defaultCode,
@@ -48,7 +46,7 @@ function CodeEditorAccordion(props: CodeEditorAccordionProps) {
 
   const onRunClick = () => {
     localStorage.setItem(codeLastSubmittedKey, code);
-    props.onRunClick(code);
+    transpilationContext.onRunClick(code);
   };
 
   const onRestoreClick = () => {
@@ -83,7 +81,7 @@ function CodeEditorAccordion(props: CodeEditorAccordionProps) {
             <Button
               variant="contained"
               startIcon={<PlayArrow />}
-              disabled={props.isTranspiling}
+              disabled={transpilationContext.isTranspiling}
               onClick={onRunClick}
             >
               Run

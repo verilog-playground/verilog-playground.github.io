@@ -1,15 +1,15 @@
 import { Box, CircularProgress } from '@mui/material';
 import Simulator from './simulator/Simulator';
+import { TranspilationContext } from './App';
+import React from 'react';
 
-interface SimulatorWrapperProps {
-  readonly isTranspiling: boolean;
-}
+function SimulatorWrapper() {
+  const transpilationContext = React.useContext(TranspilationContext);
 
-function SimulatorWrapper(props: SimulatorWrapperProps) {
   return (
     <Box position="relative" margin="2rem auto" width="fit-content">
       <Simulator />
-      {props.isTranspiling && (
+      {transpilationContext.isTranspiling && (
         <Box
           display="flex"
           alignItems="center"

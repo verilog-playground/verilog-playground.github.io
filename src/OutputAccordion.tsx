@@ -8,15 +8,10 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import Log from './Log';
 import React from 'react';
+import { TranspilationContext } from './App';
 
-interface OutputAccordionProps {
-  logs: Log[];
-  onClearLogsClick(): void;
-}
-
-function OutputAccordion(props: OutputAccordionProps) {
+function OutputAccordion() {
   const theme = useTheme();
 
   // Same as FilledInput.
@@ -24,6 +19,8 @@ function OutputAccordion(props: OutputAccordionProps) {
     const light = theme.palette.mode === 'light';
     return light ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.09)';
   }, [theme.palette.mode]);
+
+  const transpilationContext = React.useContext(TranspilationContext);
 
   return (
     <Accordion>
@@ -38,7 +35,7 @@ function OutputAccordion(props: OutputAccordionProps) {
             backgroundColor,
           }}
         >
-          {props.logs.map((log) => {
+          {transpilationContext.logs.map((log) => {
             let color = theme.palette.info.main;
             if (log.type === 'warning') {
               color = theme.palette.warning.main;
@@ -57,7 +54,7 @@ function OutputAccordion(props: OutputAccordionProps) {
           <Button
             variant="outlined"
             startIcon={<Clear />}
-            onClick={props.onClearLogsClick}
+            onClick={transpilationContext.onClearLogsClick}
           >
             Clear
           </Button>

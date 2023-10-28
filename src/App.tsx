@@ -7,6 +7,13 @@ import Log from './Log';
 import ToggleColorMode from './ToggleColorMode';
 import { CssBaseline } from '@mui/material';
 
+export const TranspilationContext = React.createContext({
+  isTranspiling: false,
+  logs: new Array<Log>(),
+  onRunClick: (_code: string) => {},
+  onClearLogsClick: () => {},
+});
+
 function App() {
   const [isTranspiling, setIsTranspiling] = React.useState(false);
   const [logs, setLogs] = React.useState<Log[]>([]);
@@ -24,17 +31,23 @@ function App() {
     setLogs([]);
   };
 
+  const transpilationContext = React.useMemo(() => {
+    return {
+      isTranspiling,
+      logs,
+      onRunClick,
+      onClearLogsClick,
+    };
+  }, [isTranspiling, logs]);
+
   return (
     <ToggleColorMode>
       <CssBaseline />
       <AppBar />
-      <SimulatorWrapper isTranspiling={isTranspiling} />
-      <AccordionsWrapper
-        isTranspiling={isTranspiling}
-        logs={logs}
-        onRunClick={onRunClick}
-        onClearLogsClick={onClearLogsClick}
-      />
+      <TranspilationContext.Provider value={transpilationContext}>
+        <SimulatorWrapper />
+        <AccordionsWrapper />
+      </TranspilationContext.Provider>
     </ToggleColorMode>
   );
 }
