@@ -1,10 +1,8 @@
-type LogTypes = 'info' | 'warning' | 'error';
+import Log from './Log';
+import LogTypes from './LogTypes';
 
 class Transpiler {
-  static transpile(
-    code: string,
-    onLog?: (message: string, type: LogTypes) => void,
-  ) {
+  static transpile(code: string, onLog?: (log: Log) => void) {
     return new Promise<string>((resolve, reject) => {
       const log = (message: string, type: LogTypes) => {
         if (type === 'info') {
@@ -15,7 +13,7 @@ class Transpiler {
           console.error(message);
         }
 
-        onLog?.(message, type);
+        onLog?.({ message, type });
       };
 
       let transpiledCode = '';

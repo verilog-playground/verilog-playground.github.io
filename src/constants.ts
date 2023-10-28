@@ -1,4 +1,5 @@
-export const codeKey = 'code';
+export const codeAutoSaveKey = 'codeAutoSaved';
+export const codeLastSubmittedKey = 'codeLastSubmitted';
 export const defaultCode = `// DESCRIPTION: SystemVerilog example module.
 
 parameter NBITS_TOP = 8;

@@ -1,10 +1,13 @@
 import { Box } from '@mui/material';
 import CodeEditorAccordion from './CodeEditorAccordion';
 import OutputAccordion from './OutputAccordion';
+import Log from './Log';
 
 interface AccordionsWrapperProps {
   isTranspiling: boolean;
+  logs: Log[];
   onRunClick(code: string): void;
+  onClearLogsClick(): void;
 }
 
 function AccordionsWrapper(props: AccordionsWrapperProps) {
@@ -14,7 +17,10 @@ function AccordionsWrapper(props: AccordionsWrapperProps) {
         isTranspiling={props.isTranspiling}
         onRunClick={props.onRunClick}
       />
-      <OutputAccordion />
+      <OutputAccordion
+        logs={props.logs}
+        onClearLogsClick={props.onClearLogsClick}
+      />
     </Box>
   );
 }

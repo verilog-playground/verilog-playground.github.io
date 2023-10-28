@@ -7,9 +7,14 @@ import {
   Box,
   Button,
   Typography,
+  useTheme,
 } from '@mui/material';
 import React from 'react';
-import { codeKey, defaultCode } from './constants';
+import {
+  codeAutoSaveKey,
+  codeLastSubmittedKey,
+  defaultCode,
+} from './constants';
 
 interface CodeEditorAccordionProps {
   isTranspiling: boolean;
@@ -17,13 +22,21 @@ interface CodeEditorAccordionProps {
 }
 
 function CodeEditorAccordion(props: CodeEditorAccordionProps) {
+  const theme = useTheme();
+
+  // Same as OutlinedInput.
+  const borderColor = React.useMemo(() => {
+    const light = theme.palette.mode === 'light';
+    return light ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)';
+  }, [theme.palette.mode]);
+
   const [code, setCode] = React.useState(
-    localStorage.getItem(codeKey) ?? defaultCode,
+    localStorage.getItem(codeAutoSaveKey) ?? defaultCode,
   );
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      localStorage.setItem(codeKey, code);
+      localStorage.setItem(codeAutoSaveKey, code);
     }, 2000);
 
     return () => clearTimeout(timer);
@@ -34,11 +47,12 @@ function CodeEditorAccordion(props: CodeEditorAccordionProps) {
   };
 
   const onRunClick = () => {
+    localStorage.setItem(codeLastSubmittedKey, code);
     props.onRunClick(code);
   };
 
   const onRestoreClick = () => {
-    setCode(localStorage.getItem(codeKey) ?? defaultCode);
+    setCode(localStorage.getItem(codeLastSubmittedKey) ?? defaultCode);
   };
 
   const onResetClick = () => {
@@ -51,10 +65,15 @@ function CodeEditorAccordion(props: CodeEditorAccordionProps) {
         <Typography>Code Editor</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Box sx={{ outline: 'solid darkgray 1px' }}>
+        <Box
+          sx={{
+            outline: `solid ${borderColor} 1px`,
+          }}
+        >
           <Editor
             height="500px"
             defaultLanguage="systemverilog"
+            theme={theme.palette.mode === 'light' ? 'light' : 'vs-dark'}
             value={code}
             onChange={onEditorChange}
           />
