@@ -1,7 +1,9 @@
 import React from 'react';
 import MainBoard from './MainBoard';
 
-function Simulator() {
+interface SimulatorProps {}
+
+function Simulator(props: SimulatorProps) {
   const [value, setValue] = React.useState(0);
 
   return (
