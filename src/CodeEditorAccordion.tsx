@@ -6,6 +6,7 @@ import {
   AccordionSummary,
   Box,
   Button,
+  Tooltip,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -91,29 +92,35 @@ function CodeEditorAccordion() {
         </Box>
         <Box display="flex" gap="1rem" marginTop="1rem">
           <Box flexGrow={1}>
-            <Button
-              variant="contained"
-              startIcon={<PlayArrow />}
-              disabled={transpilationContext.isTranspiling}
-              onClick={onRunClick}
-            >
-              Run
-            </Button>
+            <Tooltip title="Submit for transpilation." arrow placement="right">
+              <Button
+                variant="contained"
+                startIcon={<PlayArrow />}
+                disabled={transpilationContext.isTranspiling}
+                onClick={onRunClick}
+              >
+                Run
+              </Button>
+            </Tooltip>
           </Box>
-          <Button
-            variant="outlined"
-            startIcon={<Restore />}
-            onClick={onRestoreClick}
-          >
-            Restore
-          </Button>
-          <Button
-            variant="outlined"
-            startIcon={<Code />}
-            onClick={onResetClick}
-          >
-            Reset
-          </Button>
+          <Tooltip title="Restore the last submitted code." arrow>
+            <Button
+              variant="outlined"
+              startIcon={<Restore />}
+              onClick={onRestoreClick}
+            >
+              Restore
+            </Button>
+          </Tooltip>
+          <Tooltip title="Reset to the default code." arrow>
+            <Button
+              variant="outlined"
+              startIcon={<Code />}
+              onClick={onResetClick}
+            >
+              Reset
+            </Button>
+          </Tooltip>
         </Box>
         <Box marginTop="1rem">
           <ReCAPTCHA
