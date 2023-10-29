@@ -1,9 +1,9 @@
 import React from 'react';
 import { TranspilationContext } from '../App';
-import styles from './DisplayLcd.module.css';
+import styles from './LcdDisplay.module.css';
 import LcdDisplayCharacter from './LcdDisplayCharacter';
 
-function DisplayLcd() {
+function LcdDisplay() {
   const transpilationContext = React.useContext(TranspilationContext);
 
   const [index, setIndex] = React.useState(0);
@@ -88,7 +88,7 @@ function DisplayLcd() {
   }, [animation, index]);
 
   return (
-    <div className={styles.DisplayLcd}>
+    <div className={styles.LcdDisplay}>
       <div className={styles.Content}>
         <LcdDisplayCharacter text={text} />
       </div>
@@ -96,4 +96,4 @@ function DisplayLcd() {
   );
 }
 
-export default DisplayLcd;
+export default LcdDisplay;

@@ -1,11 +1,11 @@
-import DisplayLcd from './DisplayLcd';
+import LcdDisplay from './LcdDisplay';
 import styles from './BottomBoard.module.css';
 
 function BottomBoard() {
   return (
     <div className={styles.BottomBoard}>
       <div className={styles.Content}>
-        <DisplayLcd />
+        <LcdDisplay />
       </div>
     </div>
   );
