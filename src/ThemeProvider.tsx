@@ -1,15 +1,15 @@
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material';
 import React from 'react';
 
 export const ColorModeContext = React.createContext({
   toggleColorMode: () => {},
 });
 
-interface ToggleColorModeProps {
+interface ThemeProviderProps {
   readonly children: React.ReactNode;
 }
 
-function ToggleColorMode(props: ToggleColorModeProps) {
+function ThemeProvider(props: ThemeProviderProps) {
   const [mode, setMode] = React.useState<'light' | 'dark'>('light');
   const colorMode = React.useMemo(
     () => ({
@@ -32,9 +32,9 @@ function ToggleColorMode(props: ToggleColorModeProps) {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>{props.children}</ThemeProvider>
+      <MuiThemeProvider theme={theme}>{props.children}</MuiThemeProvider>
     </ColorModeContext.Provider>
   );
 }
 
-export default ToggleColorMode;
+export default ThemeProvider;

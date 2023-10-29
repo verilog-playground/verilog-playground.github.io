@@ -7,7 +7,7 @@ import {
   useTheme,
 } from '@mui/material';
 import React from 'react';
-import { ColorModeContext } from './ToggleColorMode';
+import { ColorModeContext } from './ThemeProvider';
 
 function AppBar() {
   const theme = useTheme();

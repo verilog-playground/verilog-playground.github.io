@@ -3,7 +3,7 @@ import AppBar from './AppBar';
 import SimulatorWrapper from './Simulator';
 import AccordionsWrapper from './AccordionsWrapper';
 import Transpiler from './Transpiler';
-import ToggleColorMode from './ToggleColorMode';
+import ThemeProvider from './ThemeProvider';
 import { CssBaseline } from '@mui/material';
 import { Log } from './LogsAccordion';
 
@@ -56,14 +56,14 @@ function App() {
   }, [isTranspiling, logs, transpilationState, transpiledCode]);
 
   return (
-    <ToggleColorMode>
+    <ThemeProvider>
       <CssBaseline />
       <AppBar />
       <TranspilationContext.Provider value={transpilationContext}>
         <SimulatorWrapper />
         <AccordionsWrapper />
       </TranspilationContext.Provider>
-    </ToggleColorMode>
+    </ThemeProvider>
   );
 }
 
