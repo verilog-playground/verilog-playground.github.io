@@ -12,7 +12,7 @@ export const TranspilationContext = React.createContext({
   isTranspiling: false,
   logs: new Array<Log>(),
   transpiledCode: '',
-  onRunClick: (_code: string) => {},
+  onRunClick: (_token: string, _code: string) => {},
   onClearLogsClick: () => {},
 });
 
@@ -22,12 +22,14 @@ function App() {
   const [logs, setLogs] = React.useState<Log[]>([]);
   const [transpiledCode, setTranspiledCode] = React.useState('');
 
-  const onRunClick = (code: string) => {
+  const onRunClick = (token: string, code: string) => {
     setTranspilationState('transpiling');
     setIsTranspiling(true);
     setTranspiledCode('');
 
-    Transpiler.transpile(code, (log) => setLogs((logs) => [...logs, log]))
+    Transpiler.transpile(token, code, (log) =>
+      setLogs((logs) => [...logs, log]),
+    )
       .then((transpiledCode) => {
         setTranspilationState('success');
         setTranspiledCode(transpiledCode);

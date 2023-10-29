@@ -2,7 +2,7 @@ import Log from './Log';
 import LogTypes from './LogTypes';
 
 class Transpiler {
-  static transpile(code: string, onLog?: (log: Log) => void) {
+  static transpile(token: string, code: string, onLog?: (log: Log) => void) {
     return new Promise<string>((resolve, reject) => {
       const log = (message: string, type: LogTypes) => {
         if (type === 'info') {
@@ -19,7 +19,9 @@ class Transpiler {
       let transpiledCode = '';
       let codeTransfered = false;
 
-      const sse = new WebSocket(process.env.REACT_APP_API_URL!);
+      const sse = new WebSocket(
+        process.env.REACT_APP_API_URL! + `?token=${token}`,
+      );
 
       log('[local]: Connecting...', 'info');
 

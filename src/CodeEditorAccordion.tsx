@@ -16,6 +16,7 @@ import {
   defaultCode,
 } from './constants';
 import { TranspilationContext } from './App';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 function CodeEditorAccordion() {
   const theme = useTheme();
@@ -27,6 +28,8 @@ function CodeEditorAccordion() {
   }, [theme.palette.mode]);
 
   const transpilationContext = React.useContext(TranspilationContext);
+
+  const recaptchaRef = React.useRef<ReCAPTCHA>(null);
 
   const [code, setCode] = React.useState(
     localStorage.getItem(codeAutoSaveKey) ?? defaultCode,
@@ -44,9 +47,19 @@ function CodeEditorAccordion() {
     setCode(value ?? '');
   };
 
-  const onRunClick = () => {
+  const onRunClick = async () => {
     localStorage.setItem(codeLastSubmittedKey, code);
-    transpilationContext.onRunClick(code);
+
+    if (recaptchaRef.current === null) {
+      return;
+    }
+
+    const token = await recaptchaRef.current.executeAsync();
+    if (token === null) {
+      return;
+    }
+
+    transpilationContext.onRunClick(token, code);
   };
 
   const onRestoreClick = () => {
@@ -101,6 +114,14 @@ function CodeEditorAccordion() {
           >
             Reset
           </Button>
+        </Box>
+        <Box marginTop="1rem">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            size="invisible"
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY!}
+            badge="inline"
+          />
         </Box>
       </AccordionDetails>
     </Accordion>

@@ -2,9 +2,7 @@ import React from 'react';
 import MainBoard from './MainBoard';
 import { TranspilationContext } from '../App';
 
-interface SimulatorProps {}
-
-function Simulator(props: SimulatorProps) {
+function Simulator() {
   const [seg, setSeg] = React.useState(0);
   const [swi, setSwi] = React.useState(0);
   const [led, setLed] = React.useState(0);
