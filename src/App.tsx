@@ -8,6 +8,7 @@ import ToggleColorMode from './ToggleColorMode';
 import { CssBaseline } from '@mui/material';
 
 export const TranspilationContext = React.createContext({
+  transpilationState: '',
   isTranspiling: false,
   logs: new Array<Log>(),
   transpiledCode: '',
@@ -16,17 +17,24 @@ export const TranspilationContext = React.createContext({
 });
 
 function App() {
+  const [transpilationState, setTranspilationState] = React.useState('initial');
   const [isTranspiling, setIsTranspiling] = React.useState(false);
   const [logs, setLogs] = React.useState<Log[]>([]);
   const [transpiledCode, setTranspiledCode] = React.useState('');
 
   const onRunClick = (code: string) => {
+    setTranspilationState('transpiling');
     setIsTranspiling(true);
     setTranspiledCode('');
 
     Transpiler.transpile(code, (log) => setLogs((logs) => [...logs, log]))
-      .then((transpiledCode) => setTranspiledCode(transpiledCode))
-      .catch(() => {})
+      .then((transpiledCode) => {
+        setTranspilationState('success');
+        setTranspiledCode(transpiledCode);
+      })
+      .catch(() => {
+        setTranspilationState('error');
+      })
       .finally(() => setIsTranspiling(false));
   };
 
@@ -36,13 +44,14 @@ function App() {
 
   const transpilationContext = React.useMemo(() => {
     return {
+      transpilationState,
       isTranspiling,
       logs,
       transpiledCode,
       onRunClick,
       onClearLogsClick,
     };
-  }, [isTranspiling, logs, transpiledCode]);
+  }, [isTranspiling, logs, transpilationState, transpiledCode]);
 
   return (
     <ToggleColorMode>
