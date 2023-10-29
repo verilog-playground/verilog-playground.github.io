@@ -1,5 +1,4 @@
-import Log from './Log';
-import LogTypes from './LogTypes';
+import { Log, LogTypes } from './LogsAccordion';
 
 class Transpiler {
   static transpile(token: string, code: string, onLog?: (log: Log) => void) {

@@ -11,7 +11,14 @@ import {
 import React from 'react';
 import { TranspilationContext } from './App';
 
-function OutputAccordion() {
+export type LogTypes = 'info' | 'warning' | 'error';
+
+export interface Log {
+  readonly message: string;
+  readonly type: LogTypes;
+}
+
+function LogsAccordion() {
   const theme = useTheme();
 
   // Same as FilledInput.
@@ -25,7 +32,7 @@ function OutputAccordion() {
   return (
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMore />}>
-        <Typography>Output</Typography>
+        <Typography>Logs</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Box
@@ -64,4 +71,4 @@ function OutputAccordion() {
   );
 }
 
-export default OutputAccordion;
+export default LogsAccordion;

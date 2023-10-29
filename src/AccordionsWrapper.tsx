@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
 import CodeEditorAccordion from './CodeEditorAccordion';
-import OutputAccordion from './OutputAccordion';
+import LogsAccordion from './LogsAccordion';
 
 function AccordionsWrapper() {
   return (
     <Box margin="0 1rem 1rem 1rem">
       <CodeEditorAccordion />
-      <OutputAccordion />
+      <LogsAccordion />
     </Box>
   );
 }

@@ -3,9 +3,9 @@ import AppBar from './AppBar';
 import SimulatorWrapper from './Simulator';
 import AccordionsWrapper from './AccordionsWrapper';
 import Transpiler from './Transpiler';
-import Log from './Log';
 import ToggleColorMode from './ToggleColorMode';
 import { CssBaseline } from '@mui/material';
+import { Log } from './LogsAccordion';
 
 export const TranspilationContext = React.createContext({
   transpilationState: '',
