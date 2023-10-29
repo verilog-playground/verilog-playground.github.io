@@ -6,6 +6,22 @@ interface LcdDisplayCharacterProps {
 }
 
 function LcdDisplayCharacter(props: LcdDisplayCharacterProps) {
+  const PIXEL_L = 3;
+  const PIXEL_GAP = 1;
+
+  const LINES = 2;
+  const LINE_L = 16;
+
+  const CHAR_C = 5;
+  const CHAR_L = 8;
+  const CHAR_GAP = 4;
+
+  const CHAR_W = CHAR_C * PIXEL_L + (CHAR_C - 1) * PIXEL_GAP;
+  const CHAR_H = CHAR_L * PIXEL_L + (CHAR_L - 1) * PIXEL_GAP;
+
+  const CANVAS_W = LINE_L * CHAR_W + (LINE_L - 1) * CHAR_GAP;
+  const CANVAS_H = LINES * CHAR_H + CHAR_GAP;
+
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
   const context = React.useMemo(() => {
@@ -14,7 +30,11 @@ function LcdDisplayCharacter(props: LcdDisplayCharacterProps) {
     }
 
     const canvas = canvasRef.current;
-    return canvas.getContext('2d')!;
+
+    const context = canvas.getContext('2d')!;
+    context.imageSmoothingEnabled = false;
+
+    return context;
   }, [canvasRef.current]);
 
   React.useEffect(() => {
@@ -23,31 +43,34 @@ function LcdDisplayCharacter(props: LcdDisplayCharacterProps) {
     }
 
     context.fillStyle = '#87ad34';
-    context.fillRect(0, 0, 16 * 19 + 15 * 4, 2 * 31 + 4);
+    context.fillRect(0, 0, CANVAS_W, CANVAS_H);
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < LINES; i++) {
       const line = props.text[i];
-      for (let j = 0; j < 16; j++) {
+      for (let j = 0; j < LINE_L; j++) {
         const character = line?.[j];
 
         const matrix = lcdDisplayCharacterMap.get(character);
-        for (let y = 0; y < 8; y++) {
-          for (let x = 0; x < 5; x++) {
+        for (let y = 0; y < CHAR_L; y++) {
+          for (let x = 0; x < CHAR_C; x++) {
             context.fillStyle = '#81a632';
             if ((matrix?.[y]?.charAt(x) ?? '0') === '1') {
               context.fillStyle = '#506625';
             }
 
-            context.fillRect(23 * j + 4 * x, 35 * i + 4 * y, 3, 3);
+            context.fillRect(
+              (CHAR_W + CHAR_GAP) * j + (PIXEL_L + PIXEL_GAP) * x,
+              (CHAR_H + CHAR_GAP) * i + (PIXEL_L + PIXEL_GAP) * y,
+              PIXEL_L,
+              PIXEL_L,
+            );
           }
         }
       }
     }
-  }, [context, props.text]);
+  }, [CANVAS_H, CANVAS_W, CHAR_H, CHAR_W, context, props.text]);
 
-  return (
-    <canvas ref={canvasRef} width={16 * 19 + 15 * 4} height={2 * 31 + 4} />
-  );
+  return <canvas ref={canvasRef} width={CANVAS_W} height={CANVAS_H} />;
 }
 
 export default LcdDisplayCharacter;
